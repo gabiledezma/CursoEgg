@@ -1,0 +1,30 @@
+.titulo_principal {
+  color: darkcyan;
+}
+.subtitulo {
+  color: blue;
+}
+.Amarillo {
+  color: darkorange;
+}
+.Rojo {
+  color: red;
+}
+
+td{
+    color: green;
+    text-align: center;
+}
+.texto_2{
+  color: darkgoldenrod;
+}
+#especial{
+  color: deeppink;
+}
+#verde_subrayado{
+  color: green;
+}
+.tabla{
+  border: 1;
+  border-collapse: collapse;
+}

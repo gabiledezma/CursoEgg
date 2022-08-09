@@ -1,0 +1,85 @@
+				----------------------------------------JDBC-----------------------------------------
+
+JavaTM Database Connectivity (JDBC), es una herramienta que permite que los programas Java accedan a sistemas de gestión de bases de datos. Con esto vamos a lograr escribir aplicaciones que se conecten con bases de datos, envíen consultas escritas en el lenguaje de consulta estructurada (SQL) y procesen los resultados.
+
+*COMPONENTES DE JDBC
+
+	-JDBC Driver Manager: se carga el driver especifico de la base de datos, para hacer referencia a que nos vamos a conectar a esa misma para realizar consultas
+
+	-API JDBC: conjunto de clases e interfaces que nos brindan facilidades para con la base de datos.
+
+*ACCESO A BASE DE DATOS
+
+	En este momento vamos a encargarnos de conectar java con la base de datos, para eso vamos a reestructurar un poco la arquitectura del proyecto, agregandolen un 	nuevo paquete.
+	-DAO (Data Access Object): Es el encargado de realizar todo tipo de consultas, conexiones, modificaciones con la base de datos, a partir del DAO nos vamos a 	comunicar con la base de datos
+
+	Cada entidad tendra su propio DAO asi como los servicios, ya que vamos a hacer que se especifique solo un DAO en todo el CRUD (CREATE READ UPDATE DELETE) de 	una entidad
+
+	Tambien tendremos un DAO general, que es el encargado de conectarse desconectarse y de generar cualquier tipo de consulta o manipulacion
+
+		Connection conexion = null; // Logro conectarme a la base
+    		ResultSet resultado = null; // Donde se guardan las consultas
+   	 	Statement sentencia = null; // Ejecuto SQL nativa
+    
+   		String USER = "root"; 	//Usuario que creamos al momento de instalar mysql
+   		String PASSWORD = "root";
+   	 	String DATABASE = "ejemplo2"; //nombre de la base de datos que vamos a utilizar, tiene que estar previamente creada y con las tablas ya creadas
+    		String DRIVER = "com.mysql.jdbc.Driver";  // driver que vamos a utilizar para que java sepa que nos vamos a conectar con mysql
+
+		protected void conectarBase() throws Exception {
+        		try {
+            			Class.forName(DRIVER); // Aca indicamos el driver que vamos a utilizar, puede llegar a lanzar una excepcion porque puede o no existir 							  tal clase/driver
+           			String urlBaseDeDatos = "jdbc:mysql://localhost:3306/" + DATABASE + "?useSSL=false"; // URL de la db a la que nos vamos a conectar
+            			conexion = DriverManager.getConnection(urlBaseDeDatos, USER, PASSWORD); // generamos la conexion, es decir le damos un valor a nuestro 													   atributo connection
+        		} catch (ClassNotFoundException | SQLException ex) {
+            			throw ex; //por cualquier error que atrapemos, lo vamos a lanzar nuevamente para trabajarlo en otro lado
+        		}
+    		}
+
+    		protected void desconectarBase() throws Exception {
+        		try {
+            			if (resultado != null) {
+                			resultado.close();
+            			}
+            			if (sentencia != null) {
+               		 		sentencia.close();
+            			}
+            			if (conexion != null) {
+                			conexion.close();
+            			}
+        		} catch (Exception ex) {
+            			throw ex;
+        		}
+    		}
+
+		Cuando queramos desconectarnos, si cualquiera de los 3 atributos es distinto de nulo, quiere decir que en algun momento generamos una sentencia, 		trajimos algo de la base datos o estamos conectados, necesitamos cerrar esa conexion cada vez que ejecutamos cualquier consulta, de esta forma evitamos 		que se abran muchas conexiones en paralelo
+
+    		protected void insertarModificarEliminar(String sql) throws Exception {
+        		try {
+            			conectarBase();
+            			sentencia = conexion.createStatement();  //Creamos el lugar donde vamos a ejecutar la sentencia para crear eliminar o modificar
+            			sentencia.executeUpdate(sql); // la ejecutamos y enviamos a mysql para que haga lo que tenga que hacer
+        		} catch (SQLException ex) {
+            			// conexion.rollback(); // por cualquier problema que suceda, podemos hacer un rollback, que es volver todo a como estaba antes de que 							   se ejecute la sentencia, funciona igual si lo ponemos o no
+            			
+            			throw ex;
+        		} finally {
+            			desconectarBase(); //nos desconectamos al final de todo lo que hicimos para que la conexion no quede abierta y ocupando memoria y 						     espacio
+        		}
+    		}
+
+   	 	protected void consultarBase(String sql) throws Exception {
+        		try {
+            			conectarBase();
+            			sentencia = conexion.createStatement(); //Generamos el espacio para la sentencia
+            			resultado = sentencia.executeQuery(sql); // la ejecutamos y guardamos lo que nos devuelve
+        		} catch (Exception ex) {
+            			throw ex;
+        		}
+    		}
+
+		Aca no nos desconectamos, porque si nos desconectamos, el resultado que guardamos cuando ejecutamos la sentencia se perderia, y nosotros queremos 			usarlo para mostrarlo, o hacer lo que queramos
+
+	
+
+	

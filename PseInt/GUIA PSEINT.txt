@@ -1,0 +1,88 @@
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+									BASES PSEINT INTRO
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+									EMPECEMOS A CODEAR
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1- DEFINIR VARIABLES: 
+	tipos de variables ---> Existen variables de cadena, caracter, entero, real, logico, etc
+
+	Ademas de estas variables tenemos como en pseint la forma "Leer", para ingresar datos por teclado. Esta variable se tiene que definir tambien
+	La definimos SIEMPRE de la siguiente forma:
+
+	leer variable 
+
+	Si queremos mostrar algo por pantalla como en pseint que poniamos ESCRIBIR. Aca se hace de la siguiente forma
+	
+	Escribir("Hola mundo, soy "+variableNombre+" y tengo "+variableEdad);
+
+	"Escribir" Siempre se usa para mostrar cosas por pantalla
+
+2- APRENDER SINTAXIS:
+	Como en pseint escribiamos en español, y los bucles y condicionales tenian cierta forma de escritura.
+
+
+* CONDICIONAL SI: Sirve para preguntar cosas logicas, como por ejemplo "4==2+2" ? Esto es verdadero, por lo pronto entrariamos a la parte verdadera del condicional 
+
+	sintaxis SI: SI (condicion) ENTONCES 
+			(lo que queremos que haga si la condicion es verdadera)
+		     SINO
+		        (lo que queremos que haga si la condicion es verdadera)
+		   FIN SI
+		     
+
+* BUCLE PARA: Sirve para repetir cosas una cantidad finita de veces, es decir que queremos que haga algo hasta que suceda algo
+
+	sintaxis PARA: PARA i=0 HASTA 10 CON PASO 1 HACER 
+			(Lo que queremos que se haga la cantidad de veces que el bucle PARA de vueltas)	
+
+		FIN PARA		
+			
+
+	 		lo que sucede aca es que el bucle for va a dar vueltas hasta que i llegue a 10
+
+* BUCLE MIENTRAS: Sirve para repetir cosas una cantidad infinita de veces hasta que deje de cumplirse una condicion que le vamos a dar al while
+
+	sintaxis MIENTRAS: MIENTRAS (condicion) HACER
+			(lo que queremos que haga mientras la condicion sea VERDADERA)
+			
+		FIN MIENTRAS
+			Lo que sucede es que mientras que la condicion que le ponemos al bucle sea verdadera, entonces 
+
+* BUCLE REPETIR: Es muy parecido al MIENTRAS solo que la condicion va al final, por lo que siempre va a dar una vuelta inicial, y si la condicion es verdadera, continuara dando vueltas
+
+	sintaxis REPETIR: REPETIR 
+			(lo que queremos que haga la primera vez y que siga haciendo si es que la condicion resulta verdadera)
+ 			MIENTRAS QUE (condicion)
+
+*SENTENCIA SEGUN: Es el segun de pseint es decir que segun alguna variable tome distintos valores, es lo que vamos a querer que resuelva
+
+	sintaxis SEGUN: Segun variable Hacer
+		opcion1 (valor que podria tomar la variable de arriba):
+			(lo que queremos que pase si toma este valor)
+		opcion2 (valor que podria tomar la variable de arriba):
+			(lo que queremos que pase si toma este valor)
+		opcion3 (valor que podria tomar la variable de arriba):
+			(lo que queremos que pase si toma este valor)
+		De Otro Modo:
+			(lo que queremos que pase si no entra a ninguno de los casos de arriba)
+	Fin Segun
+	
+	
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+									CONSEJOS PARA CODEAR
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1- SIEMPRE VER QUE TIPO DE VARIABLES VAMOS A UTILIZAR
+2- DEFINIR TODAS LAS VARIABLES AL PRINCIPIO DEL ALGORITMO
+3- FIJARSE BIEN CUALES DE ESAS VARIABLES TENGO QUE INICIALIZAR Y CUALES NO. (recordar que las variables que se inicializan son las que van a la derecha del = )
+4- PREGUNTARSE SI VAMOS A TENER QUE INGRESAR ALGO POR TECLADO
+5- PREGUNTARSE EL POR QUE DE CADA COSA QUE ESTOY HACIENDO, SI NO SE POR QUE LO HAGO, LO BORRO Y NO LO ESCRIBO HASTA SABER BIEN POR QUE LO HAGO
+6- ENTENDER BIEN QUE ES A LO QUE TENGO QUE LLEGAR
+7- PREGUNTARSE TODO Y PREGUNTAR SI NO ENTIENDO, NO IMPORTA CUAL SEA LA DUDA
+8- UNA VEZ HECHO, SI NO QUEDO MUY CLARO, REHACERLO SIN MIRARLO VOLVIENDO A RESPONDER EL POR QUE DE CADA COSA
+9- SI NO ENTIENDO, PREGUNTO
+10- DIVERTIRSE PROBANDO TODO TIPO DE COSAS, AUN QUE NO SALGAN

@@ -1,0 +1,16 @@
+.contenedor {
+  background-color: brown;
+}
+h1{
+     font-family:Arial;
+     text-align: center;
+}
+h2{
+    font-family:Arial;
+    text-align: center;
+}
+p{
+    font-family: 'Times New Roman';
+    text-align: left;
+    color: white;
+}

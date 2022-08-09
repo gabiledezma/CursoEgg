@@ -1,0 +1,8 @@
+.lista_animales {
+  list-style-type: lower-greek;
+}
+.redes_sociales {
+  list-style-type: upper-roman;
+  background-color: black;
+  color: white;
+}

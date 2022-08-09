@@ -1,0 +1,15 @@
+.principal {
+  border-collapse: collapse;
+  border-color: #333;
+  text-align: center;
+  font-family: Arial;
+}
+.fondoGris {
+  background-image: url("/imagenes/fondo_gris.gif");
+}
+.monedas {
+  background-color: #e6f3ff;
+}
+.datos{
+    background-color: #FFFFCC;
+}

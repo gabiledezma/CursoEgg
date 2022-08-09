@@ -1,0 +1,108 @@
+JPA es la propuesta estándar que ofrece Java para implementar un Framework Object Relational Mapping (ORM), que permite interactuar con la base de datos por medio de objetos, de esta forma, JPA tiene una facilidad a la hora de trabajar con DB, esta facilidad es en cuanto a la lectura de entidades que tenemos en nuestro proyecto, en base a las cuales se generan las tablas.
+
+JPA
+
+Ventajas
+
+Nos permite desarrollar mucho mas rápido.
+Permite trabajar con la base de datos por medio de entidades en vez de Querys.
+Nos ofrece un paradigma 100% orientado a objetos.
+Elimina errores en tiempo de ejecución.
+Mejora el mantenimiento del software.
+
+Desventajas
+
+No ofrece toda la funcionalidad que ofrecería tirar consultas nativas.
+El performance es mucho mas bajo que realizar las consultas por JBDC.
+Puede representar una curva de aprendizaje mas grande.
+ 
+JDBC
+
+Ventajas
+
+Ofrece un performance superior ya que es la forma mas directa de mandar instrucciones la base de datos.
+Permite explotar al máximo las funcionalidades de la base de datos.
+
+Desventajas
+
+El mantenimiento es mucho mas costoso.
+Introduce muchos errores en tiempo de ejecución.
+El desarrollo es mucho mas lento
+
+si requieres una aplicación donde el rendimiento sea el factor mas importante utilices JDBC, pero por otra parte si el rendimiento es algo que no están importante puedes utilizar JPA.
+
+PERSISTENCE.XML: Creamos la unidad de persistencia, y JPA se encarga de validar que las entidades sean logicas y tengan coherencia,
+para armar las tablas en base a esto.
+
+En el paquete persistencia, vamos a tener toda la interaccion de java con la base de datos
+En el paquete servicios, la logica del negocio, la interaccion entre el usuario y java
+
+Vamos a comenzar a utilizar algunas anotaciones en JPA. La primera será la anotacion @Entity.
+Con esta anotacion, JPA sabe que ésta clase será una Entidad!
+
+	@Entity: La clase es una entidad que se va a mapear con una tabla de la base de datos. Los campos de la clase se mapearán con columnas de la base de datos. Por defecto el nombre de la tabla será el nombre de la clase Java. Se puede modificar usando la anotación @Table.
+
+	@Id: indica que el campo anotado (en nuestro caso Long id) va a ser el identificador de la entidad. La columna con la que se mapea en la base de datos es la 		clave primaria de la tabla.
+
+	@GeneratedValue: El identificador se genera automáticamente por parte de la base de datos cuando la entidad se hace persistente.
+
+	@Column: Sirve para indicar características del esquema de la columna en la que se mapea el campo. El elemento name sirve para indicar el nombre de la columna 		en el mapeo. Si no estuviera, con un una columna con el nombre del atributo de la clase Java.
+	
+Las anotaciones nos validan las relaciones en las tablas de la DB
+
+Toda Entidad, vendría respondiendo a una tabla.
+JPA nos pide para cada entidad un @Id (numero identificador).
+
+Normalmente en la programacion web se manejan este tipo de formatos de ID (uuid- es alfanumerico)
+
+RELACIONES (anotaciones)
+LA primer palabra hace referencia a la clase en la que está. 
+La segunda hace referencia a la clase con la cual se relaciona.(el atributo)
+
+@OneToOne cada entidad está asociada directamente con una única entidad
+@ManyToOne muchas entidades estan asociadas directamente con una unica entidad, es la relacion opuesta para one to many 
+@OneToMany---> Se genera una Tabla intermedia en MySQL Cada entidad puede estar asociada con muchas.Normalmente esta asociación se fija con un objeto de tipo List
+@ManyToMany---> Se genera una Tabla intermedia en MySQL Muchas entidades estan asociadas con muchas entidades. Esta asociacion se fija con un objeto de tipo List
+
+NO SE RECOMIENDAN LAS RELACIONES BIDIRECCIONALES ---- pueden utilizarse para situaciones muy puntuales pero no es lo recomendable
+
+
+ENTITY MANAGER:
+em.getTransaction().begin();-----> Inicio la transaccion
+Las transacciones son aquellas que modifican datos de la base de datos.... Entonces, siempre que hagamos un CRUD, debemos iniciar
+una nueva transaccion.
+
+em.persist(objeto) -----> hacemos la peticion para que se guarde el objeto en la DB
+Generar cambios en al base de datos de forma permanente. Se utiliza para crear
+
+em.getTransaction().commit();----> Guardamos el objeto en la DB
+Commit significa CONFIRMAR, estamos confirmando el cambio en la DB
+
+Alumno alumno = em.find(Alumno.class, id)
+El FIND busca por ID
+
+em.merge(alumno) -----> Editar!! Se usa para modificar datos existentes
+em.getTransaction().commit();
+
+em.remove(alumno=---> ELIMINAR!!
+em.getTransaction().commit();
+
+
+CAda vez que queramos crear un objeto que requiere de otros en sus atributos, es mas facil 
+
+En MySQL escribiamos Querys Nativas, en JPA podemos llegar a tener que escribir Querys JPQL.
+
+
+
+Cuando queremos LISTAR varios datos, hacemos la consulta pidiendo un ResultList:
+List<Pulga> pulgas = null;
+pulgas = em.createQuery("Select p FROM Pulga p").getResultList();
+
+Si queremos devolver un unico valor, por ejemplo, buscando por ID, usamos un getSingleResult
+Pulga p = null;
+
+p = (Pulga) em.createQuery("Select p FROM Pulga p WHERE p.id = 2").getResultList();
+
+
+protected EntityManager em = Persistence.createEntityManagerFactory("JPAintroPU").createEntityManager();
+
